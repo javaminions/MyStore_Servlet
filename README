@@ -1,1 +1,3 @@
-Servlet "stuff"
+JSP Structure: 
+Each link goes to another JSP file 
+Header, footer and Navbar included in each page via their own .jsp 
