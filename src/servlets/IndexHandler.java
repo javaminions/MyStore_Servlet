@@ -68,6 +68,9 @@ public class IndexHandler extends HttpServlet {
 		if(footerSelection.equalsIgnoreCase("return")) {
 			request.getRequestDispatcher("views/Return.jsp").forward(request, response);
 		}
+		if(footerSelection.equalsIgnoreCase("faq")) {
+			request.getRequestDispatcher("views/FAQ.jsp").forward(request, response);
+		}
 	}
 
 }
