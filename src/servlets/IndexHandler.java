@@ -3,15 +3,19 @@ package servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/IndexHandler")
 public class IndexHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		String navSelection = request.getParameter("navSelection");
 		System.out.println(navSelection);
 		if(navSelection!=null) {
@@ -24,6 +28,14 @@ public class IndexHandler extends HttpServlet {
 		if(footerSelection!=null) {
 			footerHandler(footerSelection, request, response);
 		}
+		
+		//For Registration
+		String action = request.getParameter("action");
+		if(action.equals("register")) {
+			registerUser(request, response);
+		}
+		
+	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
@@ -73,4 +85,37 @@ public class IndexHandler extends HttpServlet {
 		}
 	}
 
+	private void registerUser (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+	
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("userName", userName);
+		
+		Cookie unc = new Cookie("userNameCookie", userName);
+		unc.setPath("/");
+		unc.setMaxAge(60 * 60 * 24 * 365 * 2);
+		response.addCookie(unc);
+		
+		
+	
+		session.setAttribute("password", password);
+			
+		Cookie pc = new Cookie("passwordCookie", password);
+		pc.setPath("/");
+		pc.setMaxAge(60 * 60 * 24 * 365 * 2);
+		response.addCookie(pc);
+		
+
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		
+		
+		
+
+		
+	
+
+}
 }

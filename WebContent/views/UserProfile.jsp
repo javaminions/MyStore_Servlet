@@ -7,7 +7,7 @@
 <title>UserProfile</title>
 </head>
 <body>
-<jsp:include page="navbar.html" />
+<jsp:include page="navbar.jsp" />
 <jsp:include page="Profile.html" />
 <jsp:include page="Footer.html" />
 </body>

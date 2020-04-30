@@ -7,7 +7,7 @@
 <title>Orders</title>
 </head>
 <body>
-	<jsp:include page="navbar.html" />
+	<jsp:include page="navbar.jsp" />
 	<jsp:include page="Orders.html" />
 	<jsp:include page="Footer.html" />
 </body>

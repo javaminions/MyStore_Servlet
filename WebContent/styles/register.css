@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+/* The styles for the elements */
+body { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+    margin-left: 2em;
+    margin-right: 2em;
+    width: 400px;
+    background-color: rgb(211,211,211);
+}
+
+label {
+    float: left;
+    width: 7em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+span {
+    margin-left: 0.5em;    
+    margin-bottom: 0.5em;    
+}
+br {
+    clear: both;
+}
+
+.pad_top {
+    padding-top: 0.25em;
+}
+.margin_left {
+    margin-left: 0.5em;
+}
+.align_left {
+    text-align: left;
+}
+.align_right {
+    text-align: left;
+}
+
+#registration {
+	text-align: center;
+}
+
+h1 {     
+    margin-bottom: .5em;    
+}
+h2 {     
+    margin-bottom: .5em;    
+}

@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -125,7 +126,10 @@
 					aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0 box" type="submit" id="nav_button">Search</button>
 			</form>
+
+			
 	</div><!-- /.nav-collapse -->
   </nav>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<jsp:include page="navbar.html" />
+<jsp:include page="navbar.jsp" />
 <jsp:include page="Testimonials.html" />
 <jsp:include page="Footer.html" />
 </body>
