@@ -16,10 +16,12 @@ public class IndexHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+				
 		String navSelection = request.getParameter("navSelection");
 		System.out.println(navSelection);
 		if(navSelection!=null) {
 			navHandler(navSelection, request, response);
+			return;
 		}
 		
 		
@@ -27,14 +29,19 @@ public class IndexHandler extends HttpServlet {
 		System.out.println(footerSelection);
 		if(footerSelection!=null) {
 			footerHandler(footerSelection, request, response);
+			return;
 		}
 		
 		//For Registration
 		String action = request.getParameter("action");
+		System.out.println(action);
 		if(action.equals("register")) {
 			registerUser(request, response);
+			return;
 		}
-		
+		if(action.equalsIgnoreCase("index")) {
+			
+		}
 	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
