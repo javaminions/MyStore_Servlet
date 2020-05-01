@@ -1,34 +1,52 @@
 package pojo;
 
-public class Product {
+import java.io.Serializable;
+import java.text.NumberFormat;
 
-	private String name;
-	private int id;
-	private double price;
-	private String description;
-	
-	public Product(String name, int id, double price, String description) {
+public class Product implements Serializable{
+
+	private String code;
+    private String name; 
+    private String description;
+    private int inventory; 
+    private double price;
+    private String category; 
+    private String img;
+    
+	public Product(String code, String name, String description, int inventory, double price, String category,
+			String img) {
 		super();
+		this.code = code;
 		this.name = name;
-		this.id = id;
-		this.price = price;
 		this.description = description;
+		this.inventory = inventory;
+		this.price = price;
+		this.category = category;
+		this.img = img;
 	}
-
+	
+	public String getCode() {
+		return code;
+	}
 	public String getName() {
 		return name;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
 	public String getDescription() {
 		return description;
 	}
-	
+	public int getInventory() {
+		return inventory;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public String getImg() {
+		return img;
+	}
+	public String getPriceCurrencyFormat() {
+        return NumberFormat.getCurrencyInstance().format(price);
+    }
 }
