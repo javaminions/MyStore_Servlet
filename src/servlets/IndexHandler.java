@@ -33,7 +33,16 @@ public class IndexHandler extends HttpServlet {
 		String action = request.getParameter("action");
 		if(action.equals("register")) {
 			registerUser(request, response);
+		} else if (action.equals("signin")) {
+			signInUser(request,response);
+		} else if (action.equals("registerPage")) {
+			request.getRequestDispatcher("views/register.jsp").forward(request, response);
+		} else if (action.equals("signinPage")) {
+			request.getRequestDispatcher("views/signin.jsp").forward(request, response);
 		}
+		
+		
+		
 		
 	
 	}
@@ -43,8 +52,8 @@ public class IndexHandler extends HttpServlet {
 	
 	private void navHandler(String navSelection, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(navSelection.equalsIgnoreCase("profile")){
-			request.getRequestDispatcher("views/UserProfile.jsp").forward(request, response);
+		if(navSelection.equalsIgnoreCase("register")){
+			request.getRequestDispatcher("views/register.jsp").forward(request, response);
 		} 
 		if(navSelection.equalsIgnoreCase("orders")) {
 			request.getRequestDispatcher("views/Orders.jsp").forward(request, response);
@@ -89,33 +98,81 @@ public class IndexHandler extends HttpServlet {
 		
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 	
 		HttpSession session = request.getSession();
 		
+		//UserName Cookie
 		session.setAttribute("userName", userName);
-		
 		Cookie unc = new Cookie("userNameCookie", userName);
 		unc.setPath("/");
 		unc.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(unc);
 		
 		
-	
+		//Password Cookie
 		session.setAttribute("password", password);
-			
 		Cookie pc = new Cookie("passwordCookie", password);
 		pc.setPath("/");
 		pc.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(pc);
 		
-
+		//Email Cookie
+		session.setAttribute("email", email);
+		Cookie ec = new Cookie("emailCookie", email);
+		ec.setPath("/");
+		ec.setMaxAge(60 * 60 * 24 * 365 * 2);
+		response.addCookie(ec);
+		
+		//First Name Cookie
+		session.setAttribute("firstName", firstName);
+		Cookie fnc = new Cookie("firstNameCookie", firstName);
+		fnc.setPath("/");
+		fnc.setMaxAge(60 * 60 * 24 * 365 * 2);
+		response.addCookie(fnc);
+		
+		//Last Name Cookie
+		session.setAttribute("lastName", lastName);
+		Cookie lnc = new Cookie("lastNameCookie", lastName);
+		lnc.setPath("/");
+		lnc.setMaxAge(60 * 60 * 24 * 365 * 2);
+		response.addCookie(lnc);
+		
+		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		
-		
-		
-
-		
+	}
+	
 	
 
-}
+	private void signInUser (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Cookie [] cookies = request.getCookies();
+		
+		if (request.getParameter("userName").equals(getCookieValue(cookies,"userNameCookie")) 
+				&& request.getParameter("password").equals(getCookieValue(cookies, "passwordCookie")))  {
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/register.jsp").forward(request, response);
+		}
+		
+		
+	}
+	
+	
+    public static String getCookieValue(
+            Cookie[] cookies, String cookieName) {
+        
+        String cookieValue = "";
+        if (cookies != null) {
+            for (Cookie cookie: cookies) {
+                if (cookieName.equals(cookie.getName())) {
+                    cookieValue = cookie.getValue();
+                }
+            }
+        }
+        return cookieValue;
+    }
 }

@@ -117,7 +117,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="IndexHandler?navSelection=Profile" id="Profile">User profile</a></li>
+            <li><a href="IndexHandler?navSelection=register" id="Profile">User profile</a></li>
             <li><a href="IndexHandler?navSelection=Orders" id="Orders">Orders</a></li>
             <li><a href="IndexHandler?navSelection=Cart" class="Cart-btn">Cart</a></li>
             <li class="divider"></li>
