@@ -155,7 +155,7 @@ public class IndexHandler extends HttpServlet {
 				&& request.getParameter("password").equals(getCookieValue(cookies, "passwordCookie")))  {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/register.jsp").forward(request, response);
+			request.getRequestDispatcher("views/register.jsp").forward(request, response);
 		}
 		
 		
