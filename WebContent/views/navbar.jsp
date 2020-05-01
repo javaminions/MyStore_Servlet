@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -115,14 +114,19 @@
 				class="glyphicon glyphicon-gift"></span> Wishlist
 			</a>&nbsp
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
+          
+          <c:if test="${signedin=='yes'}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome ${firstName}<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="IndexHandler?navSelection=register" id="Profile">User profile</a></li>
+          	<li><a href="IndexHandler?navSelection=Profile" id="Profile">Profile</a></li>
             <li><a href="IndexHandler?navSelection=Orders" id="Orders">Orders</a></li>
-            <li><a href="IndexHandler?navSelection=Cart" class="Cart-btn">Cart</a></li>
             <li class="divider"></li>
-            <li><a href="IndexHandler?navSelection=Logout" id="Logout">Logout</a></li>
+            <li><a href="IndexHandler?action=Logout" id="Logout">Logout</a></li>
           </ul>
+          </c:if>
+          <c:if test="${signedin==null || signedin== 'no'}">
+          <li><a href="IndexHandler?action=signinPage" id="Logout">Sign in</a></li>
+          </c:if>
         </li>
         <li><a href="javascript:void(0)" class="Cart-btn">My cart (2) items</a></li>
       </ul>

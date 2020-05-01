@@ -13,15 +13,15 @@ import pojo.Product;
 
 public class Database {
 	
-	private static Database database;
-	private Connection conn;
-	private String url = "jdbc:mysql://localhost:3306/testproduct";
+	private static Database database = null;
+	private Connection conn = null;
+	private String url = "jdbc:mysql://localhost:3306/mystore_servlet";
 	private String user = "test";
 	private String pass = "test";
 	private Properties props;
-	private PreparedStatement pstmt;
-	private List<Product> products;
-	private ResultSet rset;
+	private PreparedStatement pstmt = null;
+	private List<Product> products = null;
+	private ResultSet rset = null;
 	
 	public static synchronized Database getInstance() throws ClassNotFoundException, SQLException {
 		if(database==null) {
@@ -36,11 +36,12 @@ public class Database {
 	
 	private void init() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
+		props = new Properties();
 		
-		props.put("username", user);
-		props.put("password", pass);
+		props.put("username", "test");
+		props.put("password", "test");
 		
-		conn = DriverManager.getConnection(url, props);
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mystore_servlet?user=test&password=test");
 	}
 	
 	public List<Product> getAll() throws SQLException{

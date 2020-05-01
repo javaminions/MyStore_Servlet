@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<c:redirect url="/IndexHandler">
-	<c:param name="action" value="index" />
-</c:redirect>
+<jsp:include page="navbar.jsp" />
+<jsp:include page="Carousel.html" />
+<jsp:include page="Footer.html" />
 </body>
 </html>
