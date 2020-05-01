@@ -1,3 +1,7 @@
 JSP Structure: 
 Each link goes to another JSP file 
 Header, footer and Navbar included in each page via their own .jsp 
+
+To use the Database class: 
+Database db = Database.getInstance();
+List<Product> myList = db.getAll();
