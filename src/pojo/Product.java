@@ -2,6 +2,7 @@ package pojo;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Product implements Serializable{
 
@@ -47,6 +48,6 @@ public class Product implements Serializable{
 		return img;
 	}
 	public String getPriceCurrencyFormat() {
-        return NumberFormat.getCurrencyInstance().format(price);
+        return NumberFormat.getCurrencyInstance(Locale.US).format(price);
     }
 }

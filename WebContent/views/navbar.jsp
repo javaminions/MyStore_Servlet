@@ -1,4 +1,7 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -59,46 +62,48 @@
                             <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
 						</ul>
 					</li>
+						<c:set var = "homePath" scope = "session" value = "${pageContext.request.getContextPath()}"/>	
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Apparel</li>
-							<li class="listItem"><a href="categories.html?category=&quot;apparel&quot;&name=&quot;Mens&quot;">Mens</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;apparel&quot;&name=&quot;Womens&quot;">Womens</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;apparel&quot;&name=&quot;Kids&quot;">Kids</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Mens</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Womens</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Kids</a></li>
 							<li class="divider"></li>
 						 	<li class="dropdown-header">Accessories</li>
-						    <li class="listItem"><a href="categories.html?category=&quot;accessories&quot;&name=&quot;Hats&quot;">Hats</a></li>
-						    <li class="listItem"><a href="categories.html?category=&quot;accessories&quot;&name=&quot;Bags&quot;">Bags/Backpacks</a></li>
-						    <li class="listItem"><a href="categories.html?category=&quot;accessories&quot;&name=&quot;Visors&quot;">Visors</a></li>
-						    <li class="listItem"><a href="categories.html?category=&quot;accessories&quot;&name=&quot;Headbands&quot;">Headbands</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Hats</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Bags/Backpacks</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Visors</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Headbands</a></li>
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Sports Equipment</li>
-							<li class="listItem"><a href="categories.html?category=&quot;sports&quot;&name=&quot;Baseball&quot;">Baseball</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;sports&quot;&name=&quot;Basketball&quot;">Basketball</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;sports&quot;&name=&quot;Football&quot;">Football</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Baseball</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Basketball</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Football</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Outdoor</li>
-						    <li class="listItem"><a href="categories.html?category=&quot;outdoors&quot;&name=&quot;Hiking&quot;">Hiking</a></li>
-						    <li class="listItem"><a href="categories.html?category=&quot;outdoors&quot;&name=&quot;Surfing&quot;">Surfing</a></li>	
-						    <li class="listItem"><a href="categories.html?category=&quot;outdoors&quot;&name=&quot;Camping&quot;">Camping</a></li>			
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Hiking</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Surfing</a></li>	
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Camping</a></li>			
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Groceries</li>
-							<li class="listItem"><a href="categories.html?category=&quot;groceries&quot;&name=&quot;Frozen&quot;">Frozen</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;groceries&quot;&name=&quot;Produce&quot;">Produce</a></li>
-							<li class="listItem"><a href="categories.html?category=&quot;groceries&quot;&name=&quot;Canned&quot;">Canned items</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Frozen</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Produce</a></li>
+							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Canned items</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Sale</li>
-						    <li class="listItem"><a href="categories.html?category=&quot;sale&quot;&name=&quot;30&quot;">30%</a></li>
-						    <li class="listItem"><a href="categories.html?category=&quot;sale&quot;&name=&quot;50&quot;">50%</a></li>	
-						    <li class="listItem"><a href="categories.html?category=&quot;sale&quot;&name=&quot;Clearance&quot;">Clearance</a></li>					
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">30%</a></li>
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">50%</a></li>	
+						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">Clearance</a></li>					
 						</ul>
 					</li>
+				
 				</ul>				
 			</li>	
 			
