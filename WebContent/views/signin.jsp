@@ -5,40 +5,34 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Register With Us</title>
+<title>Sign-In</title>
 <link rel="stylesheet" href="styles/register.css" type="text/css"/>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 <div class="registrationContainer">
-<h1>Don't have an account?</h1>
-<h2>Register with us!</h2>
+<h1>Have an account already?</h1>
+<h2>Sign in below!</h2>
 
 
 <br><br><br>
 
 <div id="registration">
 <form action="IndexHandler" method="post">
-    <input type="hidden" name="action" value="register">        
-    <label class="pad_top">Email:</label>
-    <input type="email" name="email"><br>
-    <label class="pad_top">First Name:</label>
-    <input type="text" name="firstName"><br>
-    <label class=pad_top">Last Name:</label>
-    <input type="text" name="lastName"><br>
+    <input type="hidden" name="action" value="signin">        
     <label class="pad_top">Username:</label>
     <input type="text" name="userName"><br> 
     <label class="pad_top">Password:</label>
     <input type="password" name="password">  <br>     
     <label>&nbsp;</label><br>
-    <input type="submit" value="Register" class="margin_left">
+    <input type="submit" value="Sign In" class="margin_left">
 </form>
 </div>
 <br>
-<p>All ready have an account?</p>
-<form action="IndexHandler" method="post">
-<input type="hidden" name="action" value="signinPage">
-<input type="submit" value="Sign In" class="margin_left">
+<p>Don't have an account?</p>
+<form action="IndexHandler">
+<input type="hidden" name="action" value="registerPage">
+<input type="submit" value="Register" class="margin_left">
 </form>
 </div>
 
