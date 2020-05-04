@@ -81,23 +81,34 @@ public class Database {
 	
 	public UserProfile grabUserInfoFromDB (String userName) throws SQLException {
 		String query = "SELECT * FROM userprofile WHERE username='"+ userName +"'" ;
+		UserProfile user = null;
 	PreparedStatement ps = conn.prepareStatement(query);
 	ps.execute();
 	rset = ps.getResultSet();
-	rset.next();
-		UserProfile user = new UserProfile(
+	if(rset.next()) {
+		user = new UserProfile(
 				rset.getString("username"),
 				rset.getString("password"),
 				rset.getString("firstname"),
 				rset.getString("lastname"),
 				rset.getString("email")
 				);
-		
-		//user.setCartProducts(rset.getString("cartproducts"));
-		
-		
-		
 		return user;
+	} 
+	
+	else if (rset.next() == false) { 
+		user = new UserProfile("", "","", "","");
+		return user;
+	}
+	return user;
+	
+	
+
+
+		
+		
+		
+		
 		
 	}
 	

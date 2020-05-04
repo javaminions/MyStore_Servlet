@@ -98,7 +98,7 @@ public class IndexHandler extends HttpServlet {
 		
 		
 		if(caroHandler.equalsIgnoreCase("carousel")){
-			ArrayList<Product> products = new ArrayList<>();
+			ArrayList<Product> products = new ArrayList<Product>();
 			products = (ArrayList<Product>) request.getSession().getAttribute("products"); 
 			String code = request.getParameter("prodcode");
 			for(Product prod: products) {
@@ -233,7 +233,12 @@ public class IndexHandler extends HttpServlet {
 		Database database = Database.getInstance();
 
 		UserProfile user = database.grabUserInfoFromDB(userName);
-		if (!user.equals(null)) {
+		
+		if(user.getFirstName().equals("")) {
+			request.getRequestDispatcher("views/register.jsp").forward(request, response);
+		}
+		
+		else if (!user.equals(null)) {
 			//set Session Attribute & Make Cookies!
 			session.setAttribute("user", user);
 			session.setAttribute("signedin", "yes");
@@ -270,9 +275,7 @@ public class IndexHandler extends HttpServlet {
 			
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			
-		} else {
-			request.getRequestDispatcher("views/register.jsp").forward(request, response);
-		}
+		} 
 			
 		
 	}
