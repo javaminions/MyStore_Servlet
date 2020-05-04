@@ -34,7 +34,7 @@ $(document).ready(function(){
 <body>
 
 	<div class="top">
-		<img alt="Costco Logo" src="images/logo.png"
+		<img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
 			style="width: 20%; height: auto;">
 	</div>
 	

@@ -69,7 +69,6 @@ public class CartServlet extends HttpServlet {
 		for(Product product: products) {
 			if(product.getCode().equalsIgnoreCase(code)) {
 				productToAdd = product;
-				System.out.println(product.toString());
 			} else {
 				//product not found, error 
 				//products should have been loaded correctly by now 
@@ -89,7 +88,7 @@ public class CartServlet extends HttpServlet {
 			c.setMaxAge(60*60*24*365*2);
 			c.setPath("/");
 			response.addCookie(c);
-			request.getRequestDispatcher("/categories").forward(request, response);
+			
 		} else {
 			//check if item exists and then add to cart or add +1 to count 
 			ArrayList<LineItem> lineItems = cart.getLineItems();
@@ -107,9 +106,8 @@ public class CartServlet extends HttpServlet {
 			cart.setCart(lineItems);
 			request.getSession().setAttribute("cart", cart);
 			refreshCookies(cart, request, response);
-			request.getRequestDispatcher("/categories").forward(request, response);
 		}
-		
+		request.getRequestDispatcher("/categories?filterCategory=all").forward(request, response);
 	}
 	
 	public void initializeCart(Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<div class="top">
+		<img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
+			style="width: 20%; height: auto;">
+	</div>
 <nav class="navbar navbar-inverse topNav">
     <div class="navbar-header">
     	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
