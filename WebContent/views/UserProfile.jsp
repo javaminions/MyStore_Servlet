@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
-<jsp:include page="Profile.html" />
+<jsp:include page="Profile.jsp" />
 <jsp:include page="Footer.html" />
 </body>
 </html>

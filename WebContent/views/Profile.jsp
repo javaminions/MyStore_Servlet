@@ -12,12 +12,12 @@
 		<div class="card">
 			<div class="card-inner">
 				<div class="card-front">
-					<h1>tom.aronson</h1>
+					<h1>${profile.username}</h1>
 					<img src="images/user.png" alt="">
 				</div>
 				<div class="card-back">
 					<div class="card-userinfo">
-						<h3>Tom Aronson</h3>
+						<h3>${profile.firstname} ${profile.lastname}</h3>
 						<p>123 main street</p>
 						<p>Atlanta, Georgia, 30301</p>
 					</div>
