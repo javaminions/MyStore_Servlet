@@ -27,6 +27,7 @@
 					<button href="" type="button" name="+">+</button>
 				</div>
 				<div class="item-price">${item.total}</div>
+				<div><button>Delete Item</button></div>
 			</div>
 		</c:forEach>
 
