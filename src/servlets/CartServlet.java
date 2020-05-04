@@ -29,7 +29,7 @@ public class CartServlet extends HttpServlet {
 		}
 		
 		Cart cart = null;
-		if(request.getAttribute("cart")==null) {
+		if(request.getSession().getAttribute("cart")==null) {
 			cart = new Cart();
 		} else {
 			cart = (Cart) request.getSession().getAttribute("cart");
@@ -99,6 +99,9 @@ public class CartServlet extends HttpServlet {
 				}
 			}
 			cart.setCart(lineItems);
+			request.getSession().setAttribute("cart", cart);
+			refreshCookies(cart, request, response);
+			request.getRequestDispatcher("/categories").forward(request, response);
 		}
 		
 	}
@@ -113,6 +116,23 @@ public class CartServlet extends HttpServlet {
 				cart.addLineItem(CookieMonster.unstringify(c, products));
 			}
 		}
+	}
+	
+	public void refreshCookies(Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		for(Cookie c: cookies) {
+			c.setMaxAge(0);
+			c.setPath("/");
+		}
+		ArrayList<LineItem> lineItems = cart.getLineItems();
+		for(LineItem lineItem: lineItems) {
+			String[] cookieData = CookieMonster.stringify(lineItem);
+			Cookie c = new Cookie(cookieData[0], cookieData[1]);
+			c.setMaxAge(60*60*24*365*2);
+			c.setPath("/");
+			response.addCookie(c);
+		}
+		request.getSession().setAttribute("cartCount", cart.getItemCount());
 	}
 	
 }
