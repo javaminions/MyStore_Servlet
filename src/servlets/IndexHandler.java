@@ -218,14 +218,16 @@ public class IndexHandler extends HttpServlet {
     	Cart cart = new Cart();
     	if(request.getSession().getAttribute("cart")!=null) {
     		cart = (Cart) request.getSession().getAttribute("cart");
+    	} else {
+    		ArrayList<Product> products = (ArrayList<Product>) request.getSession().getAttribute("products");
+    		//if a product matches set the cart line items 
+    		for(Cookie c: cookies) {
+    			if(c.getName().contains("cartprod")) {
+    				cart.addLineItem(CookieMonster.unstringify(c, products));
+    			}
+    		}
     	}
-		ArrayList<Product> products = (ArrayList<Product>) request.getSession().getAttribute("products");
-		//if a product matches set the cart line items 
-		for(Cookie c: cookies) {
-			if(c.getName().contains("cartprod")) {
-				cart.addLineItem(CookieMonster.unstringify(c, products));
-			}
-		}
+		
 		request.getSession().setAttribute("cart", cart);
 		request.getSession().setAttribute("cartCount", cart.getItemCount());
     }
