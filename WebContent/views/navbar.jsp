@@ -61,45 +61,45 @@
                             <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
 						</ul>
 					</li>
-						<c:set var = "homePath" scope = "session" value = "${pageContext.request.getContextPath()}"/>	
+							
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Apparel</li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Mens</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Womens</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=apparel">Kids</a></li>
+							<li class="listItem"><a href="categories?filterCategory=apparel">Mens</a></li>
+							<li class="listItem"><a href="categories?filterCategory=apparel">Womens</a></li>
+							<li class="listItem"><a href="categories?filterCategory=apparel">Kids</a></li>
 							<li class="divider"></li>
 						 	<li class="dropdown-header">Accessories</li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Hats</a></li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Bags/Backpacks</a></li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Visors</a></li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=accessories">Headbands</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=accessories">Hats</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=accessories">Bags/Backpacks</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=accessories">Visors</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=accessories">Headbands</a></li>
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Sports Equipment</li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Baseball</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Basketball</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=sports">Football</a></li>
+							<li class="listItem"><a href="categories?filterCategory=sports">Baseball</a></li>
+							<li class="listItem"><a href="categories?filterCategory=sports">Basketball</a></li>
+							<li class="listItem"><a href="categories?filterCategory=sports">Football</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Outdoor</li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Hiking</a></li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Surfing</a></li>	
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=outdoors">Camping</a></li>			
+						    <li class="listItem"><a href="categories?filterCategory=outdoors">Hiking</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=outdoors">Surfing</a></li>	
+						    <li class="listItem"><a href="categories?filterCategory=outdoors">Camping</a></li>			
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">Groceries</li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Frozen</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Produce</a></li>
-							<li class="listItem"><a href="${homePath}/categories?filterCategory=groceries">Canned items</a></li>
+							<li class="listItem"><a href="categories?filterCategory=groceries">Frozen</a></li>
+							<li class="listItem"><a href="categories?filterCategory=groceries">Produce</a></li>
+							<li class="listItem"><a href="categories?filterCategory=groceries">Canned items</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Sale</li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">30%</a></li>
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">50%</a></li>	
-						    <li class="listItem"><a href="${homePath}/categories?filterCategory=sale">Clearance</a></li>					
+						    <li class="listItem"><a href="categories?filterCategory=sale">30%</a></li>
+						    <li class="listItem"><a href="categories?filterCategory=sale">50%</a></li>	
+						    <li class="listItem"><a href="categories?filterCategory=sale">Clearance</a></li>					
 						</ul>
 					</li>
 				
