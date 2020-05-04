@@ -50,7 +50,7 @@ $(document).ready(function(){
 			  		<a href="#" class="button2">Search</a>
 				</div>
 				<div class="wrap">
-					<a href="CartServlet?action=showall" class="cart"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'>0</span></a>
+					<a href="CartServlet?action=showall" class="cart"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'>${cartCount}</span></a>
 					</div>
 		</form>
 	</nav>

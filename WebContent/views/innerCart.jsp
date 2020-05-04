@@ -12,64 +12,32 @@
 	<br>
 	<div class="Cart">
 
-		<c:forEach items="${cart.lineItem}" var="item">
+		<c:forEach items="${cart.getLineItems()}" var="item">
 			<div class="item">
 				<div class="item-image">
-					<img src="images/visor.jpg" alt="">
+					<img src="${item.product.img}" alt="">
 				</div>
 				<div class="item-info">
-					<span class="item-details" id="item-brand">Costco</span> <span
-						class="item-details" id="item-name">${item.Product.name}</span>
+					<span class="item-details" id="item-brand">${item.product.name}</span> <span
+						class="item-details" id="item-name">${item.product.description}</span>
 				</div>
 				<div class="item-quantity">
-					<button type="button" name="-">-</button>
+					<button href="" type="button" name="-">-</button>
 					<span class="item-quantity-int">${item.quantity}</span>
-					<button type="button" name="+">+</button>
+					<button href="" type="button" name="+">+</button>
 				</div>
 				<div class="item-price">${item.total}</div>
 			</div>
 		</c:forEach>
 
-		<div class="item">
-			<div class="item-image">
-				<img src="images/visor.jpg" alt="">
-			</div>
-			<div class="item-info">
-				<span class="item-details" id="item-brand">Costco</span> <span
-					class="item-details" id="item-name">Visor</span> <span
-					class="item-details" id="item-color">Black</span>
-			</div>
-			<div class="item-quantity">
-				<button type="button" name="-">-</button>
-				<span class="item-quantity-int">1</span>
-				<button type="button" name="+">+</button>
-			</div>
-			<div class="item-price">$19.99</div>
-		</div>
-
-		<div class="item">
-			<div class="item-image">
-				<img src="images/ball.jpg" alt="">
-			</div>
-			<div class="item-info">
-				<span class="item-details" id="item-brand">Costco</span> <span
-					class="item-details" id="item-name">Soccer Ball</span> <span
-					class="item-details" id="item-color">White and Blue</span>
-			</div>
-			<div class="item-quantity">
-				<button type="button" name="-">-</button>
-				<span class="item-quantity-int">1</span>
-				<button type="button" name="+">+</button>
-			</div>
-			<div class="item-price">$79.99</div>
-		</div>
+		
 
 		<div class="total">
 			<div class="total-items">
-				<span>Total Items: </span> <span id="total-items">2</span>
+				<span>Total Items: </span> <span id="total-items">${cart.getItemCount()}</span>
 			</div>
 			<div class="total-cost">
-				<span>Total:</span> <span id="total-cost">$99.98</span>
+				<span>Total:</span> <span id="total-cost">${cart.getTotalCost()}</span>
 			</div>
 		</div>
 		<div class="checkout">

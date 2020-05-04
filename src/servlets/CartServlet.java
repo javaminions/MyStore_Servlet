@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,11 +23,16 @@ public class CartServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String signedin = (String) request.getSession().getAttribute("signedin");
+		if(signedin==null || signedin.equalsIgnoreCase("no")) {
+			request.getRequestDispatcher("IndexHandler?action=signinPage").forward(request, response);
+		}
+		
 		Cart cart = null;
 		if(request.getAttribute("cart")==null) {
 			cart = new Cart();
 		} else {
-			cart = (Cart) request.getAttribute("cart");
+			cart = (Cart) request.getSession().getAttribute("cart");
 		}
 		
 		String action = null;
@@ -58,7 +64,7 @@ public class CartServlet extends HttpServlet {
 	private void addToCart(Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String code = request.getParameter("prodcode");
-		List<Product> products = (List<Product>) request.getSession().getAttribute("products");
+		ArrayList<Product> products = (ArrayList<Product>) request.getSession().getAttribute("products");
 		Product productToAdd = null;
 		for(Product product: products) {
 			if(product.getCode().equalsIgnoreCase(code)) {
@@ -74,8 +80,8 @@ public class CartServlet extends HttpServlet {
 			//add to cart
 			LineItem lineItem = new LineItem(1, productToAdd);
 			cart.addLineItem(lineItem);
-			request.setAttribute("cart", cart);
-			request.setAttribute("cartCount", 1);
+			request.getSession().setAttribute("cart", cart);
+			request.getSession().setAttribute("cartCount", cart.getItemCount());
 			
 			String[] stringified = CookieMonster.stringify(lineItem);
 			
@@ -83,17 +89,30 @@ public class CartServlet extends HttpServlet {
 			c.setMaxAge(60*60*24*365*2);
 			c.setPath("/");
 			response.addCookie(c);
-			request.getRequestDispatcher("/views/categories.jsp").forward(request, response);
+			request.getRequestDispatcher("/categories").forward(request, response);
 		} else {
 			//check if item exists and then add to cart or add +1 to count 
-			
+			ArrayList<LineItem> lineItems = cart.getLineItems();
+			for(LineItem lineItem: lineItems) {
+				if(lineItem.getProduct().getCode().equalsIgnoreCase(code)) {
+					lineItem.setQuantity(lineItem.getQuantity()+1);
+				}
+			}
+			cart.setCart(lineItems);
 		}
 		
 	}
 	
-	private void initializeCart() {
+	public void initializeCart(Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//read cookies
-		//if there are product matches set the cart line items 
+		Cookie[] cookies = request.getCookies();
+		List<Product> products = (List<Product>) request.getSession().getAttribute("products");
+		//if a product matches set the cart line items 
+		for(Cookie c: cookies) {
+			if(c.getName().contains("cartprod")) {
+				cart.addLineItem(CookieMonster.unstringify(c, products));
+			}
+		}
 	}
 	
 }

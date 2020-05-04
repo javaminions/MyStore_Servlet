@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.Database;
+import pojo.Cart;
 import pojo.Product;
+import utility.CookieMonster;
 
 @WebServlet("/IndexHandler")
 public class IndexHandler extends HttpServlet {
@@ -212,11 +215,16 @@ public class IndexHandler extends HttpServlet {
     }
     public void initCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Cookie[] cookies = request.getCookies();
-    	for(Cookie c:cookies) {
-    		if(c.getName().contains("cartprod")) {
-    			
-    		}
-    	}
+    	Cart cart = new Cart();
+		ArrayList<Product> products = (ArrayList<Product>) request.getSession().getAttribute("products");
+		//if a product matches set the cart line items 
+		for(Cookie c: cookies) {
+			if(c.getName().contains("cartprod")) {
+				cart.addLineItem(CookieMonster.unstringify(c, products));
+			}
+		}
+		request.getSession().setAttribute("cart", cart);
+		request.getSession().setAttribute("cartCount", cart.getItemCount());
     }
     
     public void pageInitializer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -263,5 +271,7 @@ public class IndexHandler extends HttpServlet {
 			session.setAttribute("signedin", "no");
 			//set navbar to say sign in 
 		} 
+		
+		initCart(request, response);
     }
 }

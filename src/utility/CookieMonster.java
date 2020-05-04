@@ -37,7 +37,7 @@ public class CookieMonster {
 				lineItem.setProduct(p);
 				lineItem.setQuantity(Integer.parseInt(quantity));
 			} else {
-				return null;
+				//unable to return product
 			}
 		}
 		
