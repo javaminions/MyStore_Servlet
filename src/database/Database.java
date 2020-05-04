@@ -80,20 +80,20 @@ public class Database {
 	}
 	
 	public UserProfile grabUserInfoFromDB (String userName) throws SQLException {
-		String query = "SELECT * FROM userprofile WHERE username='"+userName+"';" ;
+		String query = "SELECT * FROM userprofile WHERE username='"+ userName +"'" ;
 	PreparedStatement ps = conn.prepareStatement(query);
 	ps.execute();
 	rset = ps.getResultSet();
-
+	rset.next();
 		UserProfile user = new UserProfile(
-				rset.getString("userName"),
+				rset.getString("username"),
 				rset.getString("password"),
-				rset.getString("firstName"),
-				rset.getString("lastName"),
+				rset.getString("firstname"),
+				rset.getString("lastname"),
 				rset.getString("email")
 				);
 		
-		user.setCartProducts(rset.getString("cartproducts"));
+		//user.setCartProducts(rset.getString("cartproducts"));
 		
 		
 		
