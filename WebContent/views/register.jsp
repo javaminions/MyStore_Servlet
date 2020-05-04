@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Register With Us</title>
 <link rel="stylesheet" href="styles/register.css" type="text/css"/>
+ <script src="scripts/login.js" charset="utf-8"></script>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
@@ -19,19 +20,25 @@
 
 <div id="registration">
 <form action="IndexHandler" method="post">
-    <input type="hidden" name="action" value="register">        
+    <input type="hidden" name="action" value="register" id="login">  
+          
     <label class="pad_top">Email:</label>
-    <input type="email" name="email"><br>
+    <input required type="email" name="email"><br><br>
+    
     <label class="pad_top">First Name:</label>
-    <input type="text" name="firstName"><br>
+    <input required type="text" name="firstName"><br><br>
+    
     <label class=pad_top">Last Name:</label>
-    <input type="text" name="lastName"><br>
+    <input required type="text" name="lastName"><br><br>
+    
     <label class="pad_top">Username:</label>
-    <input type="text" name="userName"><br> 
+    <input required type="text" name="userName"><br><br>
+    
     <label class="pad_top">Password:</label>
-    <input type="password" name="password">  <br>     
+    <input required type="password" name="password"><br>
+  
     <label>&nbsp;</label><br>
-    <input type="submit" value="Register" class="margin_left">
+    <input required type="submit" value="Register" class="margin_left">
 </form>
 </div>
 <br>
