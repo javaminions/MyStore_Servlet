@@ -6,6 +6,7 @@ public class UserProfile {
 	private String lastName;
 	private String username;
 	private String password;
+	private String cartProducts;
 	
 	public UserProfile(String firstName, String lastName, String username, String password) {
 		super();
@@ -29,5 +30,13 @@ public class UserProfile {
 
 	public String getPassword() {
 		return password;
+	}
+	
+	public String getCartProducts() {
+		return cartProducts;
+	}
+	
+	public void setCartProducts(String cartProducts) {
+		this.cartProducts = cartProducts;
 	}
 }
