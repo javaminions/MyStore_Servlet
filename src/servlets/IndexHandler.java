@@ -216,6 +216,9 @@ public class IndexHandler extends HttpServlet {
     public void initCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Cookie[] cookies = request.getCookies();
     	Cart cart = new Cart();
+    	if(request.getSession().getAttribute("cart")!=null) {
+    		cart = (Cart) request.getSession().getAttribute("cart");
+    	}
 		ArrayList<Product> products = (ArrayList<Product>) request.getSession().getAttribute("products");
 		//if a product matches set the cart line items 
 		for(Cookie c: cookies) {

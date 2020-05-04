@@ -31,5 +31,15 @@ public class Cart {
 		
 		return NumberFormat.getCurrencyInstance().format(total);
 	}
+	public void removeLineItem(LineItem lineItem) {
+		int index=0;
+		for(LineItem line: lineItems) {
+			if(line.getProduct().getCode().equalsIgnoreCase(lineItem.getProduct().getCode())) {
+				lineItems.remove(index);
+				return;
+			}
+			index++;
+		}
+	}
 
 }
