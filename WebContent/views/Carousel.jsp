@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,7 @@
 			<div class="carousel-inner">
 
 				<div class="item active imgheight">
-					<img src="images/ball.jpg">
+					<a href="IndexHandler?caroSelection=carousel&amp;prodcode=8"><img src="images/ball.jpg"></a>
 					<div class="carousel-caption">
 						<p>Balls for any occasion! <br>
 						Soccer Ball - $79.99</p>
@@ -26,7 +30,7 @@
 				<!-- End Item -->
 
 				<div class="item imgheight">
-					<img src="images/shoe.jpg">
+					<a href="IndexHandler?caroSelection=carousel&amp;prodcode=6"><img src="images/shoe.jpg"></a>
 					<div class="carousel-caption">
 						<p>Have the best shoes on the field! <br>
 						Running Shoes - $179.99</p>
@@ -35,7 +39,7 @@
 				<!-- End Item -->
 
 				<div class="item imgheight">
-					<img src="images/visor.jpg">
+					<a href="IndexHandler?caroSelection=carousel&amp;prodcode=7"><img src="images/visor.jpg"></a>
 					<div class="carousel-caption">
 						<p>Look the best while playing! <br>
 						Visor - $19.99</p>
@@ -44,19 +48,20 @@
 				<!-- End Item -->
 
 				<div class="item imgheight">
-					<img src="images/Jersey.jpg">
+					<a href="IndexHandler?caroSelection=carousel&amp;prodcode=1"><img 
+					src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png"></a>
 					<div class="carousel-caption">
-						<p>Go Team! <br>
-						DK Metcalf Jersey - $999.99</p>
+						<p>Run Fast! <br>
+						Vans Sk8-Hi MTE Shoes - $45.99</p>
 					</div>
 				</div>
 				<!-- End Item -->
 
 				<div class="item imgheight">
-					<img src="images/fishing_pole.jpg">
+					<a href="IndexHandler?caroSelection=carousel&amp;prodcode=3"><img src="images/fishing_pole.jpg"></a>
 					<div class="carousel-caption">
 						<p> Be outdoors (6ft away from others)! <br>
-						Fishing pole - $79.99</p>
+						Fishing pole - $23.99</p>
 					</div>
 				</div>
 				<!-- End Item -->
