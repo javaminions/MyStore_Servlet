@@ -211,6 +211,8 @@ public class IndexHandler extends HttpServlet {
     	}
     	HttpSession session = request.getSession();
     	session.setAttribute("signedin", "no");
+    	session.setAttribute("cartCount", "0");
+    	session.setAttribute("cart", null);
     	request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     public void initCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
