@@ -93,10 +93,16 @@ public class CartServlet extends HttpServlet {
 		} else {
 			//check if item exists and then add to cart or add +1 to count 
 			ArrayList<LineItem> lineItems = cart.getLineItems();
+			boolean exists = false; 
 			for(LineItem lineItem: lineItems) {
 				if(lineItem.getProduct().getCode().equalsIgnoreCase(code)) {
 					lineItem.setQuantity(lineItem.getQuantity()+1);
+					exists = true; 
 				}
+			}
+			if(!exists) {
+				LineItem lineItem = new LineItem(1, productToAdd);
+				cart.addLineItem(lineItem);
 			}
 			cart.setCart(lineItems);
 			request.getSession().setAttribute("cart", cart);
