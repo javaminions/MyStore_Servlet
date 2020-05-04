@@ -35,14 +35,30 @@ public class CategoryServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			String path = sc.getRealPath("/WEB-INF/products.txt");
-	        ArrayList<Product> products = ProductIO.getProducts(path);
-	        
+	        ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
+	                
 			String filteredCategory = request.getParameter("filterCategory");
+			String searchInput = request.getParameter("searchInput");
+			
+			System.out.println("search input: " + searchInput);
        
 			if(filteredCategory != null && filteredCategory != "") {
 				session.setAttribute("filteredCategory", filteredCategory); 
 				System.out.println("filtered category is: " + filteredCategory);
 			}
+			
+			ArrayList<Product> filteredProducts = new ArrayList<Product>();
+		    if(searchInput != null && searchInput != "") {
+		        System.out.println("searchInput " + searchInput);
+		        for (Product p : products) {
+					if(p.getName().contains(searchInput)) {
+						filteredProducts.add(p);
+					}
+				}
+		        session.setAttribute("filteredProducts", filteredProducts);
+		        request.setAttribute("isProductsFiltered", "yes");
+		        request.setAttribute("filter", searchInput);
+		        }
 
             //request.setAttribute("products", products);
             String url = "/views/categories.jsp";
@@ -57,5 +73,4 @@ public class CategoryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

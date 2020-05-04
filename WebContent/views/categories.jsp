@@ -25,29 +25,30 @@ $(document).ready(function(){
 	if(category != null && category != ""){
 	 	filterSelection(category);
 	} else {
-	       var categoryFromSession = '${filteredCategory}';
-	       console.log(categoryFromSession + " is last visited category");
-	       filterSelection(categoryFromSession);
+	       filterSelection("all");
 	}
 });
 </script>
 <body>
 
 	<div class="top">
-		<a href="index.jsp"><img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
-			style="width: 20%; height: auto;"></a>
+		<img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
+			style="width: 20%; height: auto;">
 	</div>
 	
 		<h2 style="text-align: center">Products</h2>
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark bg-white">
-		<form class="form-inline" action="/action_page.php">
+		<form class="form-inline" action="categories" method="post">
 			<div class="wrap">
 			  		<a href="index.jsp" class="homeButton"><i class="fas fa-home"></i></a>
 				</div>
-			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<input type="hidden" name="hiddenSearch" value=""> 
+			<input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput" name="searchInput">
 				<div class="wrap">
-			  		<a href="#" class="button2">Search</a>
+			  		<!-- <button class="btn" style="color: white; background-color: rgb(0, 115, 166)" type="submit">Search</button> -->
+			  		<input class="btn" type="submit" id="searchButton" value="Search" class="button2">
+			
 				</div>
 				<div class="wrap">
 					<a href="CartServlet?action=showall" class="cart"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'>${cartCount}</span></a>
@@ -58,22 +59,23 @@ $(document).ready(function(){
 	<br>
 	
 	<div id="myBtnContainer">
-		<button class="btn active" onclick="filterSelection('all')">
+		<button href="categories" class="btn active" onclick="filterSelection('all')">
 			Show all</button>
-		<button class="btn" onclick="filterSelection('apparel')">
+		<button href="categories" class="btn" onclick="filterSelection('apparel')">
 			Apparel</button>
-		<button class="btn" onclick="filterSelection('accessories')">
+		<button href="categories" class="btn" onclick="filterSelection('accessories')">
 			Accessories</button>
-		<button class="btn" onclick="filterSelection('sports')">
+		<button href="categories" class="btn" onclick="filterSelection('sports')">
 			Sports Equipment</button>
-		<button class="btn" onclick="filterSelection('outdoors')">
+		<button href="categories" class="btn" onclick="filterSelection('outdoors')">
 			Outdoors</button>
-		<button class="btn" onclick="filterSelection('groceries')">
+		<button href="categories" class="btn" onclick="filterSelection('groceries')">
 			Groceries</button>
-		<button class="btn" onclick="filterSelection('clearance')">
+		<button href="categories" class="btn" onclick="filterSelection('clearance')">
 			Clearance</button>
 	</div>
 	<div class="container">
+  <c:if test = "${isProductsFiltered != 'yes' || isProductsFiltered == null}">
 	   <c:forEach var="product" items="${products}">
 		<c:choose>
 		    <c:when test="${product.inventory=='0'}">
@@ -88,7 +90,7 @@ $(document).ready(function(){
 		    </c:otherwise>
 		</c:choose>
 	  
-	   <div class="filterDiv ${product.category}">
+	   <div class="filterDiv ${product.category} ${product.code}">
 			<div class="card" style="width: 18rem;">
 			  <a href="WishList.html" class="card-link text-danger d-flex justify-content-end" style="padding: 10px 10px 0 0;">
 					       	 <i class="fas fa-heart"></i>
@@ -125,6 +127,65 @@ $(document).ready(function(){
 			</div>
 		</div>
 	   </c:forEach>
+	  </c:if>
+	  
+  <c:if test = "${isProductsFiltered == 'yes'}">
+  		<div id="filterBox"> <p>Filters: </p>
+	   		<a href="categories" class="btn btn-outline-info" style="height: 40px;"><i class="fas fa-times"></i> ${filter}</a>
+	   	</div>
+  	 
+	   <c:forEach var="product" items="${filteredProducts}">
+		<c:choose>
+		    <c:when test="${product.inventory=='0'}">
+				<c:set var = "stock" scope = "session" value = "Out of stock"/>
+				<c:set var = "theColor" scope = "session" value = "color: red !important;"/>
+				<c:set var = "disableButton" scope = "session" value = "disabled"/>
+		    </c:when>    
+		    <c:otherwise>
+				<c:set var = "stock" scope = "session" value = "Available"/>
+				<c:set var = "theColor" scope = "session" value = ""/>
+				<c:set var = "disableButton" scope = "session" value = ""/>
+		    </c:otherwise>
+		</c:choose>
+	  
+	   <div class="filterDiv ${product.category} ${product.code}">
+			<div class="card" style="width: 18rem;">
+			  <a href="WishList.html" class="card-link text-danger d-flex justify-content-end" style="padding: 10px 10px 0 0;">
+					       	 <i class="fas fa-heart"></i>
+        			 		</a>
+				<img class="card-img-top"
+					src="${product.img}"
+					alt="Vans">			
+				<div class="card-body">
+					<h4 class="card-title">${product.name}</h4>
+					<h6 class="card-subtitle mb-2 text-muted" style="${theColor}">Status: ${stock}</h6>
+					<p class="card-text">${product.description}</p>
+					<div class="options d-flex flex-fill">
+						<select class="custom-select mr-1">
+							<option selected>Color</option>
+							<option value="1">Green</option>
+							<option value="2">Blue</option>
+							<option value="3">Red</option>
+						</select> <select class="custom-select ml-1">
+							<option selected>Size</option>
+							<option value="1">41</option>
+							<option value="2">42</option>
+							<option value="3">43</option>
+						</select>
+					</div>
+					<div class="buy d-flex justify-content-between align-items-center">
+						<div class="price text-success">
+							<h5 class="mt-4">${product.getPriceCurrencyFormat()}</h5>
+						</div>
+		
+						<a href="CartServlet?action=addtocart&amp;prodcode=${product.code}" class="btn btn-danger mt-3 cartButton ${disableButton}"><i
+							class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	   </c:forEach>
+	  </c:if>
 	</div>
 	
 	<script
