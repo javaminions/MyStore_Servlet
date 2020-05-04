@@ -58,6 +58,9 @@ public class CartServlet extends HttpServlet {
 			addToCart(cart, request, response);
 			return;
 		}
+		if(action.equalsIgnoreCase("plus") || action.equalsIgnoreCase("minus") || action.equalsIgnoreCase("delete")) {
+			updateCount(action, cart, request, response);
+		}
 		
 	}
 	
@@ -122,11 +125,67 @@ public class CartServlet extends HttpServlet {
 		}
 	}
 	
+	private void updateCount(String action, Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		if(action.equalsIgnoreCase("plus")) {
+			String code = request.getParameter("prodcode");
+			ArrayList<LineItem> lineItems = cart.getLineItems();
+			for(LineItem lineItem: lineItems) {
+				if(lineItem.getProduct().getCode().equalsIgnoreCase(code)) {
+					lineItem.setQuantity(lineItem.getQuantity()+1);
+				}
+			}
+			cart.setCart(lineItems);
+			refreshCookies(cart, request, response);
+			request.getSession().setAttribute("cart", cart);
+			request.getRequestDispatcher("CartServlet?action=showAll").forward(request, response);
+			return;
+		}
+		if(action.equalsIgnoreCase("minus")) {
+			String code = request.getParameter("prodcode");
+			ArrayList<LineItem> lineItems = cart.getLineItems();
+			for(LineItem lineItem: lineItems) {
+				if(lineItem.getProduct().getCode().equalsIgnoreCase(code)) {
+					if(lineItem.getQuantity()==1) {
+						cart.removeLineItem(lineItem);
+					} else {
+						lineItem.setQuantity(lineItem.getQuantity()-1);
+					}
+				}
+			}
+			cart.setCart(lineItems);
+			refreshCookies(cart, request, response);
+			request.getSession().setAttribute("cart", cart);
+			request.getRequestDispatcher("CartServlet?action=showAll").forward(request, response);
+			return;
+		}
+		if(action.equalsIgnoreCase("delete")) {
+			String code = request.getParameter("prodcode");
+			ArrayList<LineItem> lineItems = cart.getLineItems();
+			int index = 0;
+			for(LineItem lineItem: lineItems) {
+				if(lineItem.getProduct().getCode().equalsIgnoreCase(code)) {
+					lineItems.remove(index);
+					break;
+				}
+				index++;
+			}
+			cart.setCart(lineItems);
+			refreshCookies(cart, request, response);
+			request.getSession().setAttribute("cart", cart);
+			request.getRequestDispatcher("CartServlet?action=showAll").forward(request, response);
+			return;
+		}
+		
+	}
+	
 	public void refreshCookies(Cart cart, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cookie[] cookies = request.getCookies();
 		for(Cookie c: cookies) {
-			c.setMaxAge(0);
-			c.setPath("/");
+			if(c.getName().contains("cartprod")) {
+				c.setMaxAge(0);
+				c.setPath("/");
+			}
 		}
 		ArrayList<LineItem> lineItems = cart.getLineItems();
 		for(LineItem lineItem: lineItems) {

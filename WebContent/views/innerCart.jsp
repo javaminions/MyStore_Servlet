@@ -22,12 +22,12 @@
 						class="item-details" id="item-name">${item.product.description}</span>
 				</div>
 				<div class="item-quantity">
-					<button href="" type="button" name="-">-</button>
+					<a href="CartServlet?action=minus&amp;prodcode=${item.product.code}">-</a>
 					<span class="item-quantity-int">${item.quantity}</span>
-					<button href="" type="button" name="+">+</button>
+					<a href="CartServlet?action=plus&amp;prodcode=${item.product.code}">+</a>
 				</div>
 				<div class="item-price">${item.total}</div>
-				<div><button>Delete Item</button></div>
+				<a href="CartServlet?action=delete&amp;prodcode=${item.product.code}" class="item-price">Delete Item</a>
 			</div>
 		</c:forEach>
 
