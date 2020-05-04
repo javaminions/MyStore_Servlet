@@ -67,22 +67,20 @@ public class Database {
 	}
 	
 	public void addUserIntoDB (UserProfile user) throws SQLException {
-		//!!!Change this when DB is made!!!
-		String query = "INSERT into userprofiles (userName, password, firstName, lastName, email)" + "VALUES (?,?,?,?,?)";
+		String query = "INSERT into userprofile (firstname, lastname, username, password, email)" + "VALUES (?,?,?,?,?)";
 		
 		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setString(1, user.getUsername());
-		ps.setString(2, user.getPassword());
-		ps.setString(3, user.getFirstName());
-		ps.setString(4, user.getLastName());
+		ps.setString(1, user.getFirstName());
+		ps.setString(2, user.getLastName());
+		ps.setString(3, user.getUsername());
+		ps.setString(4, user.getPassword());
 		ps.setString(5, user.getEmail());
 		
 		ps.execute();
 	}
 	
 	public UserProfile grabUserInfoFromDB (String userName) throws SQLException {
-		//!!!Change this when DB is made!!!
-		String query = "SELECT * FROM userprofiles WHERE userName='"+userName+"';" ;
+		String query = "SELECT * FROM userprofile WHERE username='"+userName+"';" ;
 	PreparedStatement ps = conn.prepareStatement(query);
 	ps.execute();
 	rset = ps.getResultSet();
@@ -94,6 +92,9 @@ public class Database {
 				rset.getString("lastName"),
 				rset.getString("email")
 				);
+		
+		user.setCartProducts(rset.getString("cartproducts"));
+		
 		
 		
 		return user;

@@ -207,27 +207,46 @@ public class IndexHandler extends HttpServlet {
 
 		UserProfile user = database.grabUserInfoFromDB(userName);
 		if (!user.equals(null)) {
-			//set Session Attributes & Make Cookies!
-			session.setAttribute("userName", user.getUsername());
-			session.setAttribute("password", user.getPassword());
-			session.setAttribute("firstName", user.getFirstName());
-			session.setAttribute("lastName", user.getLastName());
-			session.setAttribute("email", user.getEmail());
+			//set Session Attribute & Make Cookies!
+			session.setAttribute("user", user);
+			session.setAttribute("signedin", "yes");
+			
+			//UserName Cookie
+			Cookie unc = new Cookie("userNameCookie", user.getUsername());
+			unc.setPath("/");
+			unc.setMaxAge(60 * 60 * 24 * 365 * 2);
+			response.addCookie(unc);
+			
+			//Password Cookie
+			Cookie pc = new Cookie("passwordCookie", user.getPassword());
+			pc.setPath("/");
+			pc.setMaxAge(60 * 60 * 24 * 365 * 2);
+			response.addCookie(pc);
+			
+			//Email Cookie
+			Cookie ec = new Cookie("emailCookie", user.getEmail());
+			ec.setPath("/");
+			ec.setMaxAge(60 * 60 * 24 * 365 * 2);
+			response.addCookie(ec);
+			
+			//First Name Cookie
+			Cookie fnc = new Cookie("firstNameCookie", user.getFirstName());
+			fnc.setPath("/");
+			fnc.setMaxAge(60 * 60 * 24 * 365 * 2);
+			response.addCookie(fnc);
+			
+			//Last Name Cookie
+			Cookie lnc = new Cookie("lastNameCookie", user.getLastName());
+			lnc.setPath("/");
+			lnc.setMaxAge(60 * 60 * 24 * 365 * 2);
+			response.addCookie(lnc);
+			
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			
+		} else {
+			request.getRequestDispatcher("views/register.jsp").forward(request, response);
 		}
 			
-		
-		
-//		Cookie [] cookies = request.getCookies();
-//		HttpSession session = request.getSession();
-//		
-//		if (request.getParameter("userName").equals(getCookieValue(cookies,"userNameCookie")) 
-//				&& request.getParameter("password").equals(getCookieValue(cookies, "passwordCookie")))  {
-//			session.setAttribute("signedin", "yes");
-//			request.getRequestDispatcher("/index.jsp").forward(request, response);
-//		} else {
-//			request.getRequestDispatcher("views/register.jsp").forward(request, response);
-//		}
-		
 		
 	}
 	
@@ -247,6 +266,9 @@ public class IndexHandler extends HttpServlet {
     }
     
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	
+    	
+    	
     	Cookie[] cookies = request.getCookies();
     	for(Cookie c:cookies) {
     		c.setMaxAge(0);
