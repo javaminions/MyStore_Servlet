@@ -34,6 +34,13 @@ public class IndexHandler extends HttpServlet {
 			return;
 		}
 		
+		//My Change
+		String caroSelection = request.getParameter("caroSelection");
+		System.out.println(caroSelection);
+		if(caroSelection!=null) {
+			caroHandler(caroSelection, request, response);
+			return;
+		}
 		
 		String footerSelection = request.getParameter("footerSelection");
 		System.out.println(footerSelection);
@@ -86,7 +93,27 @@ public class IndexHandler extends HttpServlet {
 		}
 	}
 	
+	//My Change(HC)
+	private void caroHandler(String caroHandler, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		if(caroHandler.equalsIgnoreCase("carousel")){
+			ArrayList<Product> products = new ArrayList<>();
+			products = (ArrayList<Product>) request.getSession().getAttribute("products"); 
+			String code = request.getParameter("prodcode");
+			for(Product prod: products) {
+				if (prod.getCode().equalsIgnoreCase(code)) {
+					request.getSession().setAttribute("product", prod);
+				}
+			}
+			request.getRequestDispatcher("views/Product.jsp").forward(request, response);
+			
+		} 
+		
+	}
+	
 	private void navHandler(String navSelection, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		if(navSelection.equalsIgnoreCase("register")){
 			request.getRequestDispatcher("views/register.jsp").forward(request, response);
