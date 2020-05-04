@@ -120,7 +120,7 @@
         <li class="dropdown">
           
           <c:if test="${signedin=='yes'}">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome ${firstName}<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome ${user.firstName}<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
           	<li><a href="IndexHandler?navSelection=Profile" id="Profile">Profile</a></li>
             <li><a href="IndexHandler?navSelection=Orders" id="Orders">Orders</a></li>

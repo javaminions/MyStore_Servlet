@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Properties;
 
 import pojo.Product;
+import pojo.UserProfile;
 
 public class Database {
 	
@@ -63,6 +64,40 @@ public class Database {
 					));
 		}
 		return products;
+	}
+	
+	public void addUserIntoDB (UserProfile user) throws SQLException {
+		//!!!Change this when DB is made!!!
+		String query = "INSERT into userprofiles (userName, password, firstName, lastName, email)" + "VALUES (?,?,?,?,?)";
+		
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, user.getUsername());
+		ps.setString(2, user.getPassword());
+		ps.setString(3, user.getFirstName());
+		ps.setString(4, user.getLastName());
+		ps.setString(5, user.getEmail());
+		
+		ps.execute();
+	}
+	
+	public UserProfile grabUserInfoFromDB (String userName) throws SQLException {
+		//!!!Change this when DB is made!!!
+		String query = "SELECT * FROM userprofiles WHERE userName='"+userName+"';" ;
+	PreparedStatement ps = conn.prepareStatement(query);
+	ps.execute();
+	rset = ps.getResultSet();
+
+		UserProfile user = new UserProfile(
+				rset.getString("userName"),
+				rset.getString("password"),
+				rset.getString("firstName"),
+				rset.getString("lastName"),
+				rset.getString("email")
+				);
+		
+		
+		return user;
+		
 	}
 	
 }

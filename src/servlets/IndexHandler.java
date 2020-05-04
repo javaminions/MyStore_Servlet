@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import database.Database;
 import pojo.Cart;
 import pojo.Product;
+import pojo.UserProfile;
 import utility.CookieMonster;
 
 @WebServlet("/IndexHandler")
@@ -44,7 +45,21 @@ public class IndexHandler extends HttpServlet {
 		//For Registration
 		String action = request.getParameter("action");
 		if(action!=null) {
-			actionHandler(action, request, response);
+			try {
+				actionHandler(action, request, response);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return;
 		}
 		
@@ -53,7 +68,7 @@ public class IndexHandler extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void actionHandler(String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void actionHandler(String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException, SQLException {
 		if(action.equals("register")) {
 			registerUser(request, response);
 		} else if (action.equals("signin")) {
@@ -127,6 +142,8 @@ public class IndexHandler extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 	
 		HttpSession session = request.getSession();
+		UserProfile user = new UserProfile(userName, password, firstName, lastName, email);
+		session.setAttribute("user", user);
 		
 		//UserName Cookie
 		session.setAttribute("userName", userName);
@@ -137,32 +154,40 @@ public class IndexHandler extends HttpServlet {
 		
 		
 		//Password Cookie
-		session.setAttribute("password", password);
 		Cookie pc = new Cookie("passwordCookie", password);
 		pc.setPath("/");
 		pc.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(pc);
 		
 		//Email Cookie
-		session.setAttribute("email", email);
 		Cookie ec = new Cookie("emailCookie", email);
 		ec.setPath("/");
 		ec.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(ec);
 		
 		//First Name Cookie
-		session.setAttribute("firstName", firstName);
 		Cookie fnc = new Cookie("firstNameCookie", firstName);
 		fnc.setPath("/");
 		fnc.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(fnc);
 		
 		//Last Name Cookie
-		session.setAttribute("lastName", lastName);
 		Cookie lnc = new Cookie("lastNameCookie", lastName);
 		lnc.setPath("/");
 		lnc.setMaxAge(60 * 60 * 24 * 365 * 2);
 		response.addCookie(lnc);
+		
+		try {
+			Database database = Database.getInstance();
+			database.addUserIntoDB(user);
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		session.setAttribute("signedin", "yes");
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -171,18 +196,37 @@ public class IndexHandler extends HttpServlet {
 	
 	
 
-	private void signInUser (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void signInUser (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
 		
-		Cookie [] cookies = request.getCookies();
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		
-		if (request.getParameter("userName").equals(getCookieValue(cookies,"userNameCookie")) 
-				&& request.getParameter("password").equals(getCookieValue(cookies, "passwordCookie")))  {
-			session.setAttribute("signedin", "yes");
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("views/register.jsp").forward(request, response);
+
+		Database database = Database.getInstance();
+
+		UserProfile user = database.grabUserInfoFromDB(userName);
+		if (!user.equals(null)) {
+			//set Session Attributes & Make Cookies!
+			session.setAttribute("userName", user.getUsername());
+			session.setAttribute("password", user.getPassword());
+			session.setAttribute("firstName", user.getFirstName());
+			session.setAttribute("lastName", user.getLastName());
+			session.setAttribute("email", user.getEmail());
 		}
+			
+		
+		
+//		Cookie [] cookies = request.getCookies();
+//		HttpSession session = request.getSession();
+//		
+//		if (request.getParameter("userName").equals(getCookieValue(cookies,"userNameCookie")) 
+//				&& request.getParameter("password").equals(getCookieValue(cookies, "passwordCookie")))  {
+//			session.setAttribute("signedin", "yes");
+//			request.getRequestDispatcher("/index.jsp").forward(request, response);
+//		} else {
+//			request.getRequestDispatcher("views/register.jsp").forward(request, response);
+//		}
 		
 		
 	}
