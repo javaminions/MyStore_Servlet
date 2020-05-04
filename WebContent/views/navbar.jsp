@@ -128,7 +128,7 @@
           <li><a href="IndexHandler?action=signinPage" id="Logout">Sign in</a></li>
           </c:if>
         </li>
-        <li><a href="javascript:void(0)" class="Cart-btn">My cart (2) items</a></li>
+        <li><a href="CartServlet?action=showAll" class="Cart-btn">My cart (${cartCount}) items</a></li>
       </ul>
          <form class="form-inline my-2 my-lg-0 " id="search-bar">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search"

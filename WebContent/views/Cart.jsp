@@ -4,7 +4,7 @@
 <html>
 <body>
 <jsp:include page="navbar.jsp" />
-<jsp:include page="Cart.html" />
+<jsp:include page="innerCart.jsp" />
 <jsp:include page="Footer.html" />
 </body>
 </html>

@@ -5,3 +5,10 @@ Header, footer and Navbar included in each page via their own .jsp
 To use the Database class: 
 Database db = Database.getInstance();
 List<Product> myList = db.getAll();
+
+To use the CookieMonster = 
+pass lineitem selected 
+Cookie c = CookieMonster.stringify(lineItem);
+
+to unstringify pass a cookie and the session's products 
+LineItem lineItem = CookieMonster.unstringify(cookie, products); 

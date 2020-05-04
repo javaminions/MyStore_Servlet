@@ -16,5 +16,8 @@ public class Cart {
 	public List<LineItem> getLineItems() {
 		return lineItems;
 	}
+	public int getItemCount() {
+		return lineItems.size();
+	}
 
 }

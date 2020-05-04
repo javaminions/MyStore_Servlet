@@ -21,52 +21,7 @@ public class IndexHandler extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		setUser(request, response);
-		
-		Cookie[] cookies = request.getCookies();
-		for(Cookie c: cookies) {
-			if(c.getName().equalsIgnoreCase("usernamecookie")) {
-				HttpSession session = request.getSession();
-				session.setAttribute("signedin", "yes");
-			}
-		}
-		
-		String signedin = request.getParameter("signedin");
-		if(signedin==null || signedin.equalsIgnoreCase("no")) {
-			String firstName = null;
-			HttpSession session = request.getSession();
-			//cart = 0 
-			session.setAttribute("cartCount", "0");
-			
-			//init products
-			Database database = null;
-			List<Product> products = null;
-			try {
-				database = Database.getInstance();
-				products = database.getAll();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			for(Cookie c: cookies) {
-				if(c.getName().equalsIgnoreCase("firstnamecookie")) {
-					firstName = c.getValue();
-				}
-			}
-			session.setAttribute("firstName", firstName);
-			session.setAttribute("products", products);
-			//set navbar to say sign in 
-			
-			
-		} else if(signedin.equalsIgnoreCase("yes")){
-			//retrieve cookies of lineitems
-			//set welcome message 
-			//load products 
-			//init cart 
-			//load items in the cart 
-		}
+		pageInitializer(request, response);
 		
 		String navSelection = request.getParameter("navSelection");
 		System.out.println(navSelection);
@@ -255,16 +210,58 @@ public class IndexHandler extends HttpServlet {
     	session.setAttribute("signedin", "no");
     	request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+    public void initCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	Cookie[] cookies = request.getCookies();
+    	for(Cookie c:cookies) {
+    		if(c.getName().contains("cartprod")) {
+    			
+    		}
+    	}
+    }
     
-    public void setUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	Cookie cUser = new Cookie("userNameCookie", "chrisjuste");
-		cUser.setPath("/");
-		cUser.setMaxAge(60 * 60 * 24 * 365 * 2);
-		response.addCookie(cUser);
+    public void pageInitializer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+
+		HttpSession session = request.getSession();
+		boolean signedin = false;
 		
-		Cookie cPass = new Cookie("passwordCookie", "hello");
-		cUser.setPath("/");
-		cUser.setMaxAge(60 * 60 * 24 * 365 * 2);
-		response.addCookie(cPass);
+		//Load products in session if null 
+		if(session.getAttribute("products")==null) {
+			//init products
+			Database database = null;
+			List<Product> products = null;
+			try {
+				database = Database.getInstance();
+				products = database.getAll();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			session.setAttribute("products", products);
+		}
+    	
+		//check to see if signed in, 
+		//if so set signedin to yes and 
+		//retrieve firstName cookie to set as session attribute
+    	Cookie[] cookies = request.getCookies();
+		for(Cookie c: cookies) {
+			if(c.getName().equalsIgnoreCase("usernamecookie")) {
+				session.setAttribute("signedin", "yes");
+				signedin = true;
+			}
+			if(c.getName().equalsIgnoreCase("firstnamecookie")) {
+				session.setAttribute("firstName", c.getValue());
+			}
+		}
+		
+		//if not signed in set cart to 0 and set signedin to no
+		if(signedin==false) {
+			String firstName = null;
+			//cart = 0 
+			session.setAttribute("cartCount", "0");
+			session.setAttribute("signedin", "no");
+			//set navbar to say sign in 
+		} 
     }
 }

@@ -44,7 +44,7 @@ public class CategoryServlet extends HttpServlet {
 				System.out.println("filtered category is: " + filteredCategory);
 			}
 
-            request.setAttribute("products", products);
+            //request.setAttribute("products", products);
             String url = "/views/categories.jsp";
         
         sc.getRequestDispatcher(url)

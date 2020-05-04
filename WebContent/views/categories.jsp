@@ -50,7 +50,7 @@ $(document).ready(function(){
 			  		<a href="#" class="button2">Search</a>
 				</div>
 				<div class="wrap">
-					<a href="#" class="cart"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'>0</span></a>
+					<a href="CartServlet?action=showall" class="cart"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'>0</span></a>
 					</div>
 		</form>
 	</nav>
@@ -118,7 +118,7 @@ $(document).ready(function(){
 							<h5 class="mt-4">${product.getPriceCurrencyFormat()}</h5>
 						</div>
 		
-						<a href="#" class="btn btn-danger mt-3 cartButton ${disableButton}"><i
+						<a href="CartServlet?action=addtocart&amp;prodcode=${product.code}" class="btn btn-danger mt-3 cartButton ${disableButton}"><i
 							class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
