@@ -17,8 +17,8 @@
 </head>
 <body>
 <div class="top">
-		<img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
-			style="width: 20%; height: auto;">
+		<a href="index.jsp"><img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
+			style="width: 20%; height: auto;"></a>
 	</div>
 <nav class="navbar navbar-inverse topNav">
     <div class="navbar-header">

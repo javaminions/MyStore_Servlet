@@ -3,8 +3,14 @@
   width: 80%;
   height: auto;
   margin: auto;
-  margin-top: 10%;
+  margin-top: 0;
 }
+
+.Shipping-title {
+	text-align: center;
+
+}
+
 .Shipping table, th{
   border-collapse: unset;
   border: 1px solid black;

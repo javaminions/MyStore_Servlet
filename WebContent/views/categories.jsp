@@ -34,8 +34,8 @@ $(document).ready(function(){
 <body>
 
 	<div class="top">
-		<img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
-			style="width: 20%; height: auto;">
+		<a href="index.jsp"><img alt="Costco Logo" src="https://javaminions.github.io/images/BossCo.png"
+			style="width: 20%; height: auto;"></a>
 	</div>
 	
 		<h2 style="text-align: center">Products</h2>
