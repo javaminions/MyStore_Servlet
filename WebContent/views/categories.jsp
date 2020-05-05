@@ -44,10 +44,10 @@ $(document).ready(function(){
 			  		<a href="index.jsp" class="homeButton"><i class="fas fa-home"></i></a>
 				</div>
 			<input type="hidden" name="hiddenSearch" value=""> 
-			<input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput" name="searchInput">
+			<input class="form-control mr-sm-2" style="margin-left: 50px;" type="text" placeholder="Search" id="searchInput" name="searchInput">
 				<div class="wrap">
 			  		<!-- <button class="btn" style="color: white; background-color: rgb(0, 115, 166)" type="submit">Search</button> -->
-			  		<input class="btn" type="submit" id="searchButton" value="Search" class="button2">
+			  		<input class="btn fonts" type="submit" id="searchButton" value="Search" class="button2">
 			
 				</div>
 				<div class="wrap">
@@ -59,19 +59,19 @@ $(document).ready(function(){
 	<br>
 	
 	<div id="myBtnContainer">
-		<button href="categories" class="btn active" onclick="filterSelection('all')">
+		<button href="categories" class="btn fonts active" onclick="filterSelection('all')">
 			Show all</button>
-		<button href="categories" class="btn" onclick="filterSelection('apparel')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('apparel')">
 			Apparel</button>
-		<button href="categories" class="btn" onclick="filterSelection('accessories')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('accessories')">
 			Accessories</button>
-		<button href="categories" class="btn" onclick="filterSelection('sports')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('sports')">
 			Sports Equipment</button>
-		<button href="categories" class="btn" onclick="filterSelection('outdoors')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('outdoors')">
 			Outdoors</button>
-		<button href="categories" class="btn" onclick="filterSelection('groceries')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('groceries')">
 			Groceries</button>
-		<button href="categories" class="btn" onclick="filterSelection('clearance')">
+		<button href="categories" class="btn fonts" onclick="filterSelection('clearance')">
 			Clearance</button>
 	</div>
 	<div class="container">
@@ -130,8 +130,8 @@ $(document).ready(function(){
 	  </c:if>
 	  
   <c:if test = "${isProductsFiltered == 'yes'}">
-  		<div id="filterBox"> <p>Filters: </p>
-	   		<a href="categories" class="btn btn-outline-info" style="height: 40px;"><i class="fas fa-times"></i> ${filter}</a>
+  	<div style="margin-right: 1%; margin-top: 0.5%;"> <p>Filters: </p>
+	   		<a href="categories" class="btn btn-outline-info" style="height: 40px;	font-family: Montserrat, Charcoal, sans-serif; "><i class="fas fa-times"></i> ${filter}</a>
 	   	</div>
   	 
 	   <c:forEach var="product" items="${filteredProducts}">
