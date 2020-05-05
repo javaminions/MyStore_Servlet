@@ -11,21 +11,25 @@
 
 <body>
 <br><br>
-	<h2 class="des">Product Description</h2>
-	<br>
-	<div>
-
+	
+	<div class="back">
+<h2 class="des">Product Description</h2>
+	<br><br>
 		<div class="prod-image">
-			<img src="${product.img}" height=100px width=100px alt="">
+			<img src="${product.img}" height=200px width=200px alt="">
 		</div>
-		<br>
+		<br><br>
 		<div class="prod-info">
-			<span class="prod-details" id="item-brand">${product.name}</span><br>
+			<span class="prod-details" id="prod-brand">${product.name}</span><br>
 			<h3><i>Description</i></h3>
-			<span class="prod-details" id="item-name">${product.description}</span>
+			<span class="prod-details" id="prod-name">${product.description}</span>
 		</div>
+		<div class="prod-price">
+			<h5 class="prod-p">${product.getPriceCurrencyFormat()}</h5>
+		</div>
+		
 		<div>
-			<a href="CartServlet?action=addtocart&amp;prodcode=${product.code}"
+			<a id="cartadd" href="CartServlet?action=addtocart&amp;prodcode=${product.code}"
 				class="btn btn-danger mt-3 cartButton ${disableButton}">Add to Cart</a>
 		</div>
 
